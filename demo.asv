@@ -62,13 +62,13 @@ handles.output = hObject;
 %% --------------------------------------------------
 % Initialisation
 hasData = false;
-isShow = false;  %è¡¨å¾æ˜¯å¦æ­£åœ¨è¿›è¡Œæ•°æ®æ˜¾ç¤ºï¼Œå³æ˜¯å¦æ­£åœ¨æ‰§è¡Œå‡½æ•°dataDisp
-isStopDisp = false;  %è¡¨å¾æ˜¯å¦æŒ‰ä¸‹äº†ã€åœæ­¢æ˜¾ç¤ºã€‘æŒ‰é’®
-numRec = 0;    %æ¥æ”¶å­—ç¬¦è®¡æ•°
-strRec = '';   %å·²æ¥æ”¶çš„å­—ç¬¦ä¸²
+isShow = false;  %±íÕ÷ÊÇ·ñÕıÔÚ½øĞĞÊı¾İÏÔÊ¾£¬¼´ÊÇ·ñÕıÔÚÖ´ĞĞº¯ÊıdataDisp
+isStopDisp = false;  %±íÕ÷ÊÇ·ñ°´ÏÂÁË¡¾Í£Ö¹ÏÔÊ¾¡¿°´Å¥
+numRec = 0;    %½ÓÊÕ×Ö·û¼ÆÊı
+strRec = '';   %ÒÑ½ÓÊÕµÄ×Ö·û´®
 global received_value
-received_value = zeros(550,1); % å­˜å‚¨500ä¸ªé‡‡æ ·ç‚¹ + 50 ç¼“å†²ç©ºé—´
-%% å°†ä¸Šè¿°å‚æ•°ä½œä¸ºåº”ç”¨æ•°æ®ï¼Œå­˜å…¥çª—å£å¯¹è±¡å†…
+received_value = zeros(550,1); % ´æ´¢500¸ö²ÉÑùµã + 50 »º³å¿Õ¼ä
+%% ½«ÉÏÊö²ÎÊı×÷ÎªÓ¦ÓÃÊı¾İ£¬´æÈë´°¿Ú¶ÔÏóÄÚ
 setappdata(hObject, 'hasData', hasData);
 setappdata(hObject, 'strRec', strRec);
 setappdata(hObject, 'numRec', numRec);
@@ -208,30 +208,30 @@ function figure1_ButtonDownFcn(hObject, eventdata, handles)
 function dataDisp(obj, event, handles)
 global value
 global received_value
-%	ä¸²å£çš„TimerFcnå›è°ƒå‡½æ•°
-%   ä¸²å£æ•°æ®æ˜¾ç¤º
-%% è·å–å‚æ•°
-hasData = getappdata(handles.figure1, 'hasData'); %ä¸²å£æ˜¯å¦æ”¶åˆ°æ•°æ®
-strRec = getappdata(handles.figure1, 'strRec');   %ä¸²å£æ•°æ®çš„å­—ç¬¦ä¸²å½¢å¼ï¼Œå®šæ—¶æ˜¾ç¤ºè¯¥æ•°æ®
-numRec = getappdata(handles.figure1, 'numRec');   %ä¸²å£æ¥æ”¶åˆ°çš„æ•°æ®ä¸ªæ•°
-%% è‹¥ä¸²å£æ²¡æœ‰æ¥æ”¶åˆ°æ•°æ®ï¼Œå…ˆå°è¯•æ¥æ”¶ä¸²å£æ•°æ®
+%	´®¿ÚµÄTimerFcn»Øµ÷º¯Êı
+%   ´®¿ÚÊı¾İÏÔÊ¾
+%% »ñÈ¡²ÎÊı
+hasData = getappdata(handles.figure1, 'hasData'); %´®¿ÚÊÇ·ñÊÕµ½Êı¾İ
+strRec = getappdata(handles.figure1, 'strRec');   %´®¿ÚÊı¾İµÄ×Ö·û´®ĞÎÊ½£¬¶¨Ê±ÏÔÊ¾¸ÃÊı¾İ
+numRec = getappdata(handles.figure1, 'numRec');   %´®¿Ú½ÓÊÕµ½µÄÊı¾İ¸öÊı
+%% Èô´®¿ÚÃ»ÓĞ½ÓÊÕµ½Êı¾İ£¬ÏÈ³¢ÊÔ½ÓÊÕ´®¿ÚÊı¾İ
 if ~hasData
     bytes(obj, event, handles);
 end
-%% è‹¥ä¸²å£æœ‰æ•°æ®ï¼Œæ˜¾ç¤ºä¸²å£æ•°æ®
+%% Èô´®¿ÚÓĞÊı¾İ£¬ÏÔÊ¾´®¿ÚÊı¾İ
 if hasData
-    %% ç»™æ•°æ®æ˜¾ç¤ºæ¨¡å—åŠ äº’æ–¥é”
-    %% åœ¨æ‰§è¡Œæ˜¾ç¤ºæ•°æ®æ¨¡å—æ—¶ï¼Œä¸æ¥å—ä¸²å£æ•°æ®ï¼Œå³ä¸æ‰§è¡ŒBytesAvailableFcnå›è°ƒå‡½æ•°
+    %% ¸øÊı¾İÏÔÊ¾Ä£¿é¼Ó»¥³âËø
+    %% ÔÚÖ´ĞĞÏÔÊ¾Êı¾İÄ£¿éÊ±£¬²»½ÓÊÜ´®¿ÚÊı¾İ£¬¼´²»Ö´ĞĞBytesAvailableFcn»Øµ÷º¯Êı
     setappdata(handles.figure1, 'isShow', true); 
-    %% è‹¥è¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²é•¿åº¦è¶…è¿‡1000ï¼Œæ¸…ç©ºæ˜¾ç¤ºåŒº
+    %% ÈôÒªÏÔÊ¾µÄ×Ö·û´®³¤¶È³¬¹ı1000£¬Çå¿ÕÏÔÊ¾Çø
     if length(strRec) > 10000
         strRec = '';
         setappdata(handles.figure1, 'strRec', strRec);
     end
-    %% æ˜¾ç¤ºæ•°æ®
+    %% ÏÔÊ¾Êı¾İ
     set(handles.OutputString, 'string', strRec);
 
-%ä¿å­˜æˆ.txtæ–‡ä»¶    
+%±£´æ³É.txtÎÄ¼ş    
 % [FileName PathName]=uiputfile({'*.txt','Txt Files(*.txt)';'*.*','All Files(*.*)'},'choose a File');
 % ysw= [PathName FileName];
 % dlmwrite(ysw, strRec,'delimiter','\t');
@@ -243,19 +243,19 @@ value=get(handles.OutputString,'string');
 save('ysw.mat','value');
 % 
 % if isempty(value)
-%     msgbox( 'å½“å‰æ²¡æœ‰æ¥æ”¶åˆ°æ•°æ®','æç¤º');
+%     msgbox( 'µ±Ç°Ã»ÓĞ½ÓÊÕµ½Êı¾İ','ÌáÊ¾');
 %     fclose(gcf)
 % else value
 
 %if value 
-%    value1=textscan(value,'%s'); %è¯»å–å…¶ä¸­çš„æ•°æ®
-    % value=textscan(ysw,'%s'); %è¯»å–å…¶ä¸­çš„æ•°æ®
-%    value2=value1{1};%å¾—åˆ°æ•°æ®ï¼Œå­˜å‚¨åˆ°value1ä¸­
+%    value1=textscan(value,'%s'); %¶ÁÈ¡ÆäÖĞµÄÊı¾İ
+    % value=textscan(ysw,'%s'); %¶ÁÈ¡ÆäÖĞµÄÊı¾İ
+%    value2=value1{1};%µÃµ½Êı¾İ£¬´æ´¢µ½value1ÖĞ
 %    num=length(value2);
 %    val=[];
 %    i=1;
 %    for ii=1:2:num-1
-%        val=[val,hex2dec(strcat(value2{ii},value2{ii+1}))];%è½¬æ¢
+%        val=[val,hex2dec(strcat(value2{ii},value2{ii+1}))];%×ª»»
 %        time(i) = 0.005*ii;%???
 %        i=i+1;
 %    end
@@ -263,10 +263,11 @@ save('ysw.mat','value');
    
 %    plot(handles.plotAD,time,val);
 % Xin ZHAO modified received data from received_data
-    x_axis = (0:0.01:5);% time = 10s for 1000 sampling data with frequency 100Hz
-    %l = length(received_value);
-    y_axis = received_value (end - 500:end);
+    x_axis = (0:0.01:10);% time = 10s for 1000 sampling data with frequency 100Hz
+    l = length(received_value);
+    y_axis = received_value [(l - 500 + 1):l];
     plot(handles.plotAD, x_axis, y_axis);
+
 
 %     hold on
 %     close(figure(1))
@@ -277,50 +278,49 @@ save('ysw.mat','value');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    %% æ›´æ–°æ¥æ”¶è®¡æ•°
+    %% ¸üĞÂ½ÓÊÕ¼ÆÊı
     set(handles.rec,'string', numRec);
-    %% æ›´æ–°hasDataæ ‡å¿—ï¼Œè¡¨æ˜ä¸²å£æ•°æ®å·²ç»æ˜¾ç¤º
+    %% ¸üĞÂhasData±êÖ¾£¬±íÃ÷´®¿ÚÊı¾İÒÑ¾­ÏÔÊ¾
     setappdata(handles.figure1, 'hasData', false);
-    %% ç»™æ•°æ®æ˜¾ç¤ºæ¨¡å—è§£é”
+    %% ¸øÊı¾İÏÔÊ¾Ä£¿é½âËø
     setappdata(handles.figure1, 'isShow', false);
 end
 
 
 function bytes(obj, ~, handles)
-global received_value
-%   ä¸²å£çš„BytesAvailableFcnå›è°ƒå‡½æ•°
-%   ä¸²å£æ¥æ”¶æ•°æ®
-%% è·å–å‚æ•°
-strRec = getappdata(handles.figure1, 'strRec'); %è·å–ä¸²å£è¦æ˜¾ç¤ºçš„æ•°æ®
-numRec = getappdata(handles.figure1, 'numRec'); %è·å–ä¸²å£å·²æ¥æ”¶æ•°æ®çš„ä¸ªæ•°
-isStopDisp = getappdata(handles.figure1, 'isStopDisp'); %æ˜¯å¦æŒ‰ä¸‹äº†ã€åœæ­¢æ˜¾ç¤ºã€‘æŒ‰é’®
-%isHexDisp = getappdata(handles.figure1, 'isHexDisp'); %æ˜¯å¦åå…­è¿›åˆ¶æ˜¾ç¤º
-isShow = getappdata(handles.figure1, 'isShow');  %æ˜¯å¦æ­£åœ¨æ‰§è¡Œæ˜¾ç¤ºæ•°æ®æ“ä½œ
-%% è‹¥æ­£åœ¨æ‰§è¡Œæ•°æ®æ˜¾ç¤ºæ“ä½œï¼Œæš‚ä¸æ¥æ”¶ä¸²å£æ•°æ®
+global received_value;
+%   ´®¿ÚµÄBytesAvailableFcn»Øµ÷º¯Êı
+%   ´®¿Ú½ÓÊÕÊı¾İ
+%% »ñÈ¡²ÎÊı
+strRec = getappdata(handles.figure1, 'strRec'); %»ñÈ¡´®¿ÚÒªÏÔÊ¾µÄÊı¾İ
+numRec = getappdata(handles.figure1, 'numRec'); %»ñÈ¡´®¿ÚÒÑ½ÓÊÕÊı¾İµÄ¸öÊı
+isStopDisp = getappdata(handles.figure1, 'isStopDisp'); %ÊÇ·ñ°´ÏÂÁË¡¾Í£Ö¹ÏÔÊ¾¡¿°´Å¥
+%isHexDisp = getappdata(handles.figure1, 'isHexDisp'); %ÊÇ·ñÊ®Áù½øÖÆÏÔÊ¾
+isShow = getappdata(handles.figure1, 'isShow');  %ÊÇ·ñÕıÔÚÖ´ĞĞÏÔÊ¾Êı¾İ²Ù×÷
+%% ÈôÕıÔÚÖ´ĞĞÊı¾İÏÔÊ¾²Ù×÷£¬Ôİ²»½ÓÊÕ´®¿ÚÊı¾İ
 if isShow
-    %msgbox('debug: isShow = true, adplot failed');
+    msgbox('debug: isShow = true, adplot failed');
     return;
 end
-%% è·å–ä¸²å£å¯è·å–çš„æ•°æ®ä¸ªæ•°
-% n æœ‰å¤§äº10ä¸ªçš„å¯èƒ½
+%% »ñÈ¡´®¿Ú¿É»ñÈ¡µÄÊı¾İ¸öÊı
 n = get(obj, 'BytesAvailable');
-%% è‹¥ä¸²å£æœ‰æ•°æ®ï¼Œæ¥æ”¶æ‰€æœ‰æ•°æ®
+%% Èô´®¿ÚÓĞÊı¾İ£¬½ÓÊÕËùÓĞÊı¾İ
 if n
-    %% æ›´æ–°hasDataå‚æ•°ï¼Œè¡¨æ˜ä¸²å£æœ‰æ•°æ®éœ€è¦æ˜¾ç¤º
+    %% ¸üĞÂhasData²ÎÊı£¬±íÃ÷´®¿ÚÓĞÊı¾İĞèÒªÏÔÊ¾
     setappdata(handles.figure1, 'hasData', true);
-    %% è¯»å–ä¸²å£æ•°æ®
+    %% ¶ÁÈ¡´®¿ÚÊı¾İ
     a = fread(obj, n, 'uchar');
     received_value = [received_value; a];
-    % ä½¿received_valueæ•°ç»„å›ºå®šåœ¨1000
-    % å¦‚æœæ¯”è¾ƒå½±å“æ€§èƒ½ï¼Œè¿™é‡Œå¯ä»¥æ¯10æˆ–100å†åˆ é™¤ä¸€æ¬¡ï¼Œä½†æ˜¯ç”»å›¾å‡½æ•°å°±è¦æˆªå–ä½æ•°äº†ã€‚
-    % ä¿®æ”¹ï¼šreceived_valueå¤§äº600ä»¥åæˆªå–
+    % Ê¹received_valueÊı×é¹Ì¶¨ÔÚ1000
+    % Èç¹û±È½ÏÓ°ÏìĞÔÄÜ£¬ÕâÀï¿ÉÒÔÃ¿10»ò100ÔÙÉ¾³ıÒ»´Î£¬µ«ÊÇ»­Í¼º¯Êı¾ÍÒª½ØÈ¡Î»ÊıÁË¡£
+    % ĞŞ¸Ä£ºreceived_value´óÓÚ600ÒÔºó½ØÈ¡
     if (length(received_value))>= 600
-        received_value = received_value(end - 550 + 1 :end,:);
+        received_value = received_value(:,101:end);
     end
     
-    %% è‹¥æ²¡æœ‰åœæ­¢æ˜¾ç¤ºï¼Œå°†æ¥æ”¶åˆ°çš„æ•°æ®è§£ç®—å‡ºæ¥ï¼Œå‡†å¤‡æ˜¾ç¤º
+    %% ÈôÃ»ÓĞÍ£Ö¹ÏÔÊ¾£¬½«½ÓÊÕµ½µÄÊı¾İ½âËã³öÀ´£¬×¼±¸ÏÔÊ¾
     if ~isStopDisp 
-        %% æ ¹æ®è¿›åˆ¶æ˜¾ç¤ºçš„çŠ¶æ€ï¼Œè§£ææ•°æ®ä¸ºè¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+        %% ¸ù¾İ½øÖÆÏÔÊ¾µÄ×´Ì¬£¬½âÎöÊı¾İÎªÒªÏÔÊ¾µÄ×Ö·û´®
         %if ~isHexDisp 
         %c = char(a');
             %c = char(a');
@@ -329,14 +329,14 @@ if n
             strHex2 = [strHex; blanks(size(a, 1))];
             c = strHex2(:)';         
         %end
-        %% æ›´æ–°å·²æ¥æ”¶çš„æ•°æ®ä¸ªæ•°
+        %% ¸üĞÂÒÑ½ÓÊÕµÄÊı¾İ¸öÊı
         numRec = numRec + size(a, 1);
-        %% æ›´æ–°è¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+        %% ¸üĞÂÒªÏÔÊ¾µÄ×Ö·û´®
         strRec = [strRec c];
     end
-    %% æ›´æ–°å‚æ•°
-    setappdata(handles.figure1, 'numRec', numRec); %æ›´æ–°å·²æ¥æ”¶çš„æ•°æ®ä¸ªæ•°
-    setappdata(handles.figure1, 'strRec', strRec); %æ›´æ–°è¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+    %% ¸üĞÂ²ÎÊı
+    setappdata(handles.figure1, 'numRec', numRec); %¸üĞÂÒÑ½ÓÊÕµÄÊı¾İ¸öÊı
+    setappdata(handles.figure1, 'strRec', strRec); %¸üĞÂÒªÏÔÊ¾µÄ×Ö·û´®
 end
 
 
@@ -345,18 +345,18 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%   å…³é—­çª—å£æ—¶ï¼Œæ£€æŸ¥å®šæ—¶å™¨å’Œä¸²å£æ˜¯å¦å·²å…³é—­
-%   è‹¥æ²¡æœ‰å…³é—­ï¼Œåˆ™å…ˆå…³é—­
-%% æŸ¥æ‰¾å®šæ—¶å™¨
+%   ¹Ø±Õ´°¿ÚÊ±£¬¼ì²é¶¨Ê±Æ÷ºÍ´®¿ÚÊÇ·ñÒÑ¹Ø±Õ
+%   ÈôÃ»ÓĞ¹Ø±Õ£¬ÔòÏÈ¹Ø±Õ
+%% ²éÕÒ¶¨Ê±Æ÷
 t = timerfind;
-%% è‹¥å­˜åœ¨å®šæ—¶å™¨å¯¹è±¡ï¼Œåœæ­¢å¹¶å…³é—­
+%% Èô´æÔÚ¶¨Ê±Æ÷¶ÔÏó£¬Í£Ö¹²¢¹Ø±Õ
 if ~isempty(t)
-    stop(t);  %è‹¥å®šæ—¶å™¨æ²¡æœ‰åœæ­¢ï¼Œåˆ™åœæ­¢å®šæ—¶å™¨
+    stop(t);  %Èô¶¨Ê±Æ÷Ã»ÓĞÍ£Ö¹£¬ÔòÍ£Ö¹¶¨Ê±Æ÷
     delete(t);
 end
-%% æŸ¥æ‰¾ä¸²å£å¯¹è±¡
+%% ²éÕÒ´®¿Ú¶ÔÏó
 scoms = instrfind;
-%% å°è¯•åœæ­¢ã€å…³é—­åˆ é™¤ä¸²å£å¯¹è±¡
+%% ³¢ÊÔÍ£Ö¹¡¢¹Ø±ÕÉ¾³ı´®¿Ú¶ÔÏó
 try
     stopasync(scoms);
     fclose(scoms);
@@ -365,7 +365,7 @@ try
 %    msgbox('Com not closed! Need Xin ZHAO to debug!');
 %    return;
 end
-%% å…³é—­çª—å£
+%% ¹Ø±Õ´°¿Ú
 delete(hObject);
 % Hint: delete(hObject) closes the figure
 % delete(hObject);
@@ -377,7 +377,7 @@ function stop_disp_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % Hint: get(hObject,'Value') returns toggle state of stop_disp
-%% æ ¹æ®ã€åœæ­¢æ˜¾ç¤ºã€‘æŒ‰é’®çš„çŠ¶æ€ï¼Œæ›´æ–°isStopDispå‚æ•°
+%% ¸ù¾İ¡¾Í£Ö¹ÏÔÊ¾¡¿°´Å¥µÄ×´Ì¬£¬¸üĞÂisStopDisp²ÎÊı
 if get(hObject, 'Value')
     isStopDisp = true;
 else
@@ -386,7 +386,7 @@ end
 setappdata(handles.figure1, 'isStopDisp', isStopDisp);
 
 function clear_count_Callback(hObject, eventdata, handles)
-%% è®¡æ•°æ¸…é›¶ï¼Œå¹¶æ›´æ–°å‚æ•°numRecå’ŒnumSend
+%% ¼ÆÊıÇåÁã£¬²¢¸üĞÂ²ÎÊınumRecºÍnumSend
 %set([handles.rec, handles.trans], 'string', '0')
 set(handles.rec, 'string', '0')
 setappdata(handles.figure1, 'numRec', 0);
@@ -398,7 +398,7 @@ function clear_received_Callback(hObject, eventdata, handles)
 % hObject    handle to clear_received (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%% æ¸…ç©ºè¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+%% Çå¿ÕÒªÏÔÊ¾µÄ×Ö·û´®
 setappdata(handles.figure1, 'strRec', '');
-%% æ¸…ç©ºæ˜¾ç¤º
+%% Çå¿ÕÏÔÊ¾
 set(handles.OutputString, 'String', '');
