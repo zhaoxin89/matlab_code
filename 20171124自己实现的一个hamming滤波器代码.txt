@@ -1,0 +1,17 @@
+%now a FIR filter
+f1=100;f2=130;%通带阻带界
+Fs=2000;%原来的fs太大了
+wp=f1/(Fs/2);% 频率归一化
+ws=f2/(Fs/2);
+wp = wp*pi;
+ws = ws*pi;
+wdel=ws-wp;% 过渡带宽
+wn=0.5*(wp+ws);% 近似计算截止频率
+N=ceil(6.6*pi/wdel);% 根据过渡带宽度求滤波器阶数
+window=hamming(N+1);% 海明窗
+b=fir1(N,wn/pi,window);% FIR滤波器设计
+[h,f]=freqz(b,1);% 查看滤波器幅频及相频特性
+%[H,W]=freqz(B,A,N)当N是一个整数时函数返回N点的频率向量和幅频响应向量 B和A分别是分子分母多项式 
+%返回量H则包含了离散系统频响在 0~pi范围内N个频率等分点的值（其中N为正整数），w则包含了范围内N个频率等分点
+figure,
+plot(((f/pi)*(Fs/2)),20*log10(abs(h)));%参数分别是频率与幅值
